@@ -4,10 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de masa de pizza</title>
+
+    <link rel="shortcut icon" href="./assets/img/icono_1.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <title>PD Calculadora</title>
 </head>
+
 <body>
-    <h1>Calculadora de masa de pizza</h1>
-    <script src="./calculadora.js"></script>
+
+    <div class="grid">
+    <header>
+        <a href="./index.html" id="icono_home"><img class="icono" src="./assets/img/icono_1.png" alt="Home"></a>
+    </header>      
+
+    <main>
+
+        <section class="circulo_central">
+            <article>
+                <p class="titulo">Cuánta harina? </p>
+                <form class="formulario" action="">
+
+                    <label for="estilo">Estilo de pizza:</label>
+                    <select class="calculadora_input" name="estilo" id="estilo">
+                        <option value="napolitana">Pizza Napolitana</option>
+                        <option value="romana">Pizza Romana</option>
+                        <option value="chubutense">Pizza chubutense</option>
+                    </select>
+
+                    <label for="numero_de_pizzas">Número de pizzas:</label>
+                    <input class="calculadora_input" type="number" name="numero_de_pizzas" placeholder="4">
+
+                    <label for="levadura">Tipo de levadura:</label>
+                    <select class="calculadora_input" name="levadura" id="">
+                        <option value="fresca">Levadura Fresca</option>
+                        <option value="seca">Levadura Seca</option>
+                    </select>
+
+                    <label for="hidratacion">% de hidratación:</label>
+                    <input class="calculadora_input" type="number" name="hidratacion" placeholder="80%">
+
+                    <label for="gramos">Tamaño de pizza (gr):</label>
+                    <input class="calculadora_input" type="number" name="gramos" placeholder="250">
+
+                    <input type="submit" value="Calcular" class="enviar">
+
+                </form>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <span><a href="https://twitter.com/mdemiang"> twitter</a></span>
+        <span>©marcelo demian gómez</span>        
+    </footer>
+</div>
+<script src="./calculadora.js"></script>
 </body>
 </html>
