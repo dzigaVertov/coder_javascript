@@ -1,0 +1,19 @@
+#+title: Notas curso javascript
+* TODO Cosas a hacer
+** DONE Crear objeto carrito
+*** DONE Método para agregar ingredientes a los arrays del carrito
+
+*** DONE Método para calcular el valor total de la compra
+*** DONE Métodos de validación ¿?
+** DONE Crear objeto producto
+
+** DONE Agregar html de la calculadora
+
+** DONE Pasar las funciones a métodos de los objetos.  
+** DONE Hacer objetosAgregar precios y unidades al objeto producto
+** DONE Crear Carrito al comienzo de la compra
+** DONE Resolver lo que no funciona del mostrar resultados
+
+** DONE Agregar resultados de carrito
+
+** DONE Resolver cuando las cantidades son cero
