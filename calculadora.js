@@ -154,11 +154,11 @@ function validar_peso(peso_pizza){
     }
 }
 
-function obtener_datos() {
+function obtener_datos(inputs_formulario) {
     
-    let tipo = 0;
+    /* let tipo = 0;
     do {
-        tipo = parseInt(prompt("Ingrese tipo de pizza 1 = Napolitana 2 = New York")); /* 1=napolitana 2=New york  */
+        tipo = parseInt(prompt("Ingrese tipo de pizza 1 = Napolitana 2 = New York")); /* 1=napolitana 2=New york  
     } while (!validar_tipo_pizza(tipo));
 
     let numero_pizzas = 0;
@@ -174,24 +174,30 @@ function obtener_datos() {
 
     let levadura = 0;
     do {
-        levadura = parseInt(prompt("Ingrese tipo de levadura 1 = fresca 2 = seca")); /* 1=levadura fresca 2=levadura seca */
+        levadura = parseInt(prompt("Ingrese tipo de levadura 1 = fresca 2 = seca")); /* 1=levadura fresca 2=levadura seca 
     } while (!validar_levadura(levadura));
 
     let peso_pizza = 0;
     do {
         peso_pizza = parseInt(prompt("Ingrese peso deseado de cada pizza en gramos"));
     } while (!validar_peso(peso_pizza));
-    
+     */
 
-    return new masa(tipo, numero_pizzas, hidratacion, levadura, peso_pizza);
+    /* Inputs validados */
+    
+    return new masa(inputs_formulario.estilo.value, 
+        inputs_formulario.numero_de_pizzas.value, 
+        inputs_formulario.hidratacion.value, 
+        inputs_formulario.levadura.value,
+        inputs_formulario.gramos.value);
 }
 
 function calcular_cantidad_ingredientes(datos_masa){
     
     const porcentaje_sal = 0.02;
-    const porcentaje_levadura = (datos_masa.levadura === 1 ) ? 0.01 : 0.0033; /* fresca = 1% seca= 0,3% */
+    const porcentaje_levadura = (datos_masa.levadura === 'fresca' ) ? 0.01 : 0.0033; /* fresca = 1% seca= 0,3% */
     const porcentaje_aceite = (datos_masa.tipo === 2) ? 0.01 : 0.0; /* 1=napolitana 2=New york  */
-    const tipo_levadura = (datos_masa.levadura === 1) ? 'levadura_fresca' : 'levadura_seca';
+    const tipo_levadura = (datos_masa.levadura === 'fresca') ? 'levadura_fresca' : 'levadura_seca';
         
     let cantidad_masa = datos_masa.numero_pizzas * datos_masa.peso_pizza;
 
@@ -222,12 +228,33 @@ function mostrar_informacion(cantidades_ingredientes){
     }
 }
 
-let carro_compra = new Carrito();
+document.addEventListener('DOMContentLoaded', ()=> {
+    let carro_compra = new Carrito();
+})
 
+let formulario = document.getElementById('formulario');
+formulario.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log('submited');
+    let inputs_formulario = document.getElementsByClassName('calculadora_input');
+    let datos_masa = obtener_datos(inputs_formulario);
+    for (const inp of inputs_formulario){
+        console.log(inp.name);
+        console.log(inp.value);
+    }
+
+    let cantidades_ingredientes = calcular_cantidad_ingredientes(datos_masa);
+    for (const ingr in cantidades_ingredientes){
+        console.log(cantidades_ingredientes[ingr]);
+    }
+});
+
+
+/* 
 do {
     let datos_masa = obtener_datos();
     let cantidades_ingredientes = calcular_cantidad_ingredientes(datos_masa);
     carro_compra.agregar_ingredientes(cantidades_ingredientes);
     mostrar_informacion(cantidades_ingredientes);
 } while (confirm("¿Desea calcular nuevamente?"));
-carro_compra.mostrar_totales_compra();
+carro_compra.mostrar_totales_compra(); */
