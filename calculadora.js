@@ -1,23 +1,4 @@
-/* Constantes útiles */
-const lista_productos = ['harina', 'levadura_fresca', 'levadura_seca', 'aceite', 'sal'];
-
-/* Precios productos */
-const precios = {
-    'harina' : 300,
-    'levadura_fresca' : 20,
-    'levadura_seca' : 10,
-    'sal' : 10,
-    'aceite' : 500,
-}
-
-/* Unidades de los productos en gramos */
-const unidades  = {
-    'harina' : 1000,
-    'levadura_fresca' : 50,
-    'levadura_seca' : 10,
-    'sal' : 200,
-    'aceite' : 500,
-}
+import {lista_productos, precios, unidades} from "./stock.js";
 
 class Carrito {
     constructor(){
@@ -32,6 +13,15 @@ class Carrito {
             }
             
         }
+    }
+
+    static reconstruir_carrito_storage(productos){
+        let carrito_reconstruido = new Carrito();
+        if(productos.productos){
+            carrito_reconstruido.productos = productos.productos;
+        }
+        
+        return carrito_reconstruido;
     }
 
     calcular_totales_compra() {
@@ -67,12 +57,32 @@ class Carrito {
         let precio_con_iva = (parseFloat(precio_total[0]) + parseFloat(precio_total[1])).toFixed(2);
         let cantidades_totales = this.calcular_totales_compra();
 
-        console.log("\nTOTALES PRODUCTOS:");
+        let cont_totales = document.getElementById('contenedor_totales');
         for (const prod of cantidades_totales) {
-            console.log(`${prod.tipo}: ${prod.cantidad}gs \t $${prod.calcular_precio()}(envases de ${prod.peso_unidad}gs)`);
+            let div = document.createElement('div');
+            div.classList.add('card');
+            div.innerHTML = `<h3>${prod.tipo}:</h3> 
+                            <h3>${prod.cantidad}gs (envases de ${prod.peso_unidad}gs)</h3>
+                            <h3>$${prod.calcular_precio()}</h3>`;
+            cont_totales.appendChild(div);
         }
-        console.log(`\nTOTAL: $${precio_total[0]}`);
-        console.log(`IVA: $${precio_total[1]}`);
+
+        let totales = document.createElement('div');
+        totales.classList.add('card');
+        totales.innerHTML = `<h3>TOTAL: </h3> <h3>$${precio_total[0]}</h3>`;
+        cont_totales.appendChild(totales);
+
+        totales = document.createElement('div');
+        totales.classList.add('card');
+        totales.innerHTML = `<h3>IVA: </h3> <h3>$${precio_total[1]}</h3>`;
+        cont_totales.appendChild(totales);
+
+        totales = document.createElement('div');
+        totales.classList.add('card');
+        totales.innerHTML = `<h3>TOTAL + IVA: </h3> <h3>$${precio_con_iva}</h3>`;
+        cont_totales.appendChild(totales);
+        
+
         console.log(`TOTAL + IVA: $${precio_con_iva}`);
     }
 }
@@ -198,7 +208,7 @@ function calcular_cantidad_ingredientes(datos_masa){
     const porcentaje_levadura = (datos_masa.levadura === 'fresca' ) ? 0.01 : 0.0033; /* fresca = 1% seca= 0,3% */
     const porcentaje_aceite = (datos_masa.tipo === 2) ? 0.01 : 0.0; /* 1=napolitana 2=New york  */
     const tipo_levadura = (datos_masa.levadura === 'fresca') ? 'levadura_fresca' : 'levadura_seca';
-        
+    const hidratacion = datos_masa.hidratacion / 100;  
     let cantidad_masa = datos_masa.numero_pizzas * datos_masa.peso_pizza;
 
     /* Cantidad_masa =   cantidad_harina + 
@@ -207,9 +217,9 @@ function calcular_cantidad_ingredientes(datos_masa){
                         (cantidad_harina * porcentaje_levadura) +
                         (cantidad_harina * porcentaje_aceite)     */
 
-    let cantidad_harina = cantidad_masa / (1 + datos_masa.hidratacion + porcentaje_aceite + porcentaje_levadura + porcentaje_aceite);
+    let cantidad_harina = cantidad_masa / (1 + hidratacion + porcentaje_aceite + porcentaje_levadura + porcentaje_aceite);
     
-    let cantidad_agua = Math.round(cantidad_harina * datos_masa.hidratacion);
+    let cantidad_agua = Math.round(cantidad_harina * hidratacion);
     let cantidad_sal = Math.round(cantidad_harina * porcentaje_sal);
     let cantidad_levadura = Math.round(cantidad_harina * porcentaje_levadura);
     let cantidad_aceite = Math.round(cantidad_harina * porcentaje_aceite);
@@ -218,37 +228,85 @@ function calcular_cantidad_ingredientes(datos_masa){
     return new ingredientes(cantidad_harina, cantidad_agua, cantidad_sal, cantidad_levadura, cantidad_aceite, tipo_levadura);
 }
 
-function mostrar_informacion(cantidades_ingredientes){
-    console.log(`\nCantidad de harina: ${cantidades_ingredientes.harina.cantidad}gs`);
-    console.log(`Cantidad de agua: ${cantidades_ingredientes.agua}gs`);
-    console.log(`Cantidad de sal: ${cantidades_ingredientes.sal.cantidad}gs`);
-    console.log(`Cantidad de levadura: ${cantidades_ingredientes.levadura.cantidad}gs`);
-    if (cantidades_ingredientes.aceite.cantidad > 0 ){
-        console.log(`Cantidad de aceite: ${cantidades_ingredientes.aceite.cantidad}gs`);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', ()=> {
-    let carro_compra = new Carrito();
+    /* localStorage.clear(); */
+    let carrito = JSON.parse(localStorage.getItem('carrito'));
+    if (!carrito){
+        carrito = new Carrito();
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+
+    carrito = Carrito.reconstruir_carrito_storage(carrito);
+
+    if(location.href.includes('carro')){
+        carrito.mostrar_totales_compra();
+    }
+
+    
 })
 
-let formulario = document.getElementById('formulario');
-formulario.addEventListener('submit', (event) => {
-    event.preventDefault();
-    console.log('submited');
-    let inputs_formulario = document.getElementsByClassName('calculadora_input');
-    let datos_masa = obtener_datos(inputs_formulario);
-    for (const inp of inputs_formulario){
-        console.log(inp.name);
-        console.log(inp.value);
+if(location.href.includes('index')){
+    let formulario = document.getElementById('formulario');
+
+    formulario.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        let inputs_formulario = document.getElementsByClassName('calculadora_input');
+        let datos_masa = obtener_datos(inputs_formulario);
+        
+        let cantidades_ingredientes = calcular_cantidad_ingredientes(datos_masa);
+        llenar_ingredientes(cantidades_ingredientes);
+        let ventana_receta = document.getElementById('contenedor_receta');
+        ventana_receta.classList.toggle('modal_toggle');
+    });
+
+    const llenar_ingredientes = (cantidades_ingredientes) => {
+        let lista_ingredientes = document.getElementById('lista_ingredientes');
+
+        /* Quitar receta anterior del storage */
+        localStorage.removeItem('receta_actual');
+        /* Agregar nueva receta al storage */
+        localStorage.setItem('receta_actual', JSON.stringify(cantidades_ingredientes) );
+
+        
+        /* Quitar la receta anterior, si la hubiere */
+        lista_ingredientes.querySelectorAll('div.ingrediente').forEach( x => lista_ingredientes.removeChild(x));
+        
+        for (const ingr in cantidades_ingredientes){
+
+            let cantidad = (ingr === 'agua') ? cantidades_ingredientes[ingr] : cantidades_ingredientes[ingr].cantidad;
+
+            if(cantidad > 0) {
+                const div = document.createElement('div');
+                div.classList.add('ingrediente');
+                if(ingr === 'agua'){
+                    div.innerHTML += `<h3>${ingr}</h3><h3>${cantidades_ingredientes[ingr]} gs</h3>`;
+                } else {
+                    div.innerHTML += `<h3>${ingr}</h3><h3>${cantidades_ingredientes[ingr].cantidad} gs</h3>`;
+                }
+            
+                lista_ingredientes.appendChild(div);
+            }        
+        }
     }
 
-    let cantidades_ingredientes = calcular_cantidad_ingredientes(datos_masa);
-    for (const ingr in cantidades_ingredientes){
-        console.log(cantidades_ingredientes[ingr]);
-    }
-});
+    let btn_cerrar_modal = document.getElementById('btn_cerrar');
+    btn_cerrar_modal.addEventListener('click', (event) => {
+        let ventana_receta = document.getElementById('contenedor_receta');
+        ventana_receta.classList.toggle('modal_toggle');
+    })
 
+    let btn_agregar_carrito = document.getElementById('btn_agregar_carrito');
+    btn_agregar_carrito.addEventListener('click', (event) => {
+        let ingredientes_receta_actual = recuperar_receta_actual_storage();
+        let carrito = Carrito.reconstruir_carrito_storage(JSON.parse(localStorage.getItem('carrito')));
+        carrito.agregar_ingredientes(ingredientes_receta_actual);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        console.log(carrito);
+    })
+
+
+}
 
 /* 
 do {
@@ -258,3 +316,25 @@ do {
     mostrar_informacion(cantidades_ingredientes);
 } while (confirm("¿Desea calcular nuevamente?"));
 carro_compra.mostrar_totales_compra(); */
+
+function recuperar_receta_actual_storage(){
+    let receta_actual = JSON.parse(localStorage.getItem('receta_actual'));
+    let harina = receta_actual.harina.cantidad;
+    let agua = receta_actual.agua;
+    let sal = receta_actual.sal.cantidad;
+    let levadura = receta_actual.levadura.cantidad;
+    let aceite = receta_actual.aceite.cantidad;
+    let tipo_levadura = receta_actual.levadura.tipo;
+
+    return new ingredientes(harina, agua, sal, levadura, aceite, tipo_levadura);
+}
+
+let btn_vaciar_carrito = document.getElementById('btn_vaciar_carrito');
+if (btn_vaciar_carrito){
+    btn_vaciar_carrito.addEventListener('click', event => {
+        let carrito = new Carrito();
+        localStorage.setItem('carrito', JSON.stringify('carrito'));
+        carrito.mostrar_totales_compra();
+        location.reload();
+    })
+}
