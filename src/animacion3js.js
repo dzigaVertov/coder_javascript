@@ -65,7 +65,7 @@ normalPizza.mapping = THREE.UVMapping;
 let model;
 let mixer;
 const loader = new GLTFLoader();
-loader.load('/assets/3d/pizza_3.glb', function ( gltf ) {
+loader.load('/coder_javascript/assets/3d/pizza_3.glb', function ( gltf ) {
     model = gltf.scene;
     
 
