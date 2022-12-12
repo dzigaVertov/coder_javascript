@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" href="../assets/img/icono_1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <title>PD Tiempo de Fermentación</title>
+</head>
+
+<body>
+
+    <div class="grid">
+    <header id="header_fermentacion">
+        <a href="../index.html" id="icono_home"><img class="icono" src="../assets/img/icono_1.png" alt="Home"></a>
+        <p class="info">Aquí puedes calcular el tiempo necesario de fermentación de la masa de acuerdo a la temperatura ambiente.</p>
+    </header>      
+
+    <main>
+
+        <section class="circulo_central">
+            <article>
+                    <p class="titulo">Tiempo de fermentación </p>
+
+                
+                <div class="temp_tiempo">
+                    <div id="temperatura"></div>
+                    <div id="t_fermentacion"></div>        
+                    <input type="button" id="btn_calcular" value="Calcular">
+                </div>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <span><a href="https://twitter.com/mdemiang"> twitter</a></span>
+        <span>©marcelo demian gómez</span>        
+    </footer>
+</div>
+<script src="../src/stock.js" type="module"></script>
+<script src="../src/index.js" type="module"></script>
+<script src="../src/fermentacion.js"></script>
+</body>
+</html>

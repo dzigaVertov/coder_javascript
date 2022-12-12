@@ -17,64 +17,32 @@
     <div class="grid">
     <header>
         <a href="./index.html" id="icono_home"><img class="icono" src="./assets/img/icono_1.png" alt="Home"></a>
-        <a href="./carro.html" id="link_carrito"><span class="material-symbols-outlined">shopping_cart_checkout</span></a>
+        <a href="./pages/calculadora.html">Calculadora</a>
+        <a href="./pages/tiempoFermentacion.html">Tiempo de fermentación</a>
+        <a href="./pages/carro.html" id="link_carrito"><span class="material-symbols-outlined">shopping_cart_checkout</span></a>
     </header>      
 
     <main>
-
-        <section class="circulo_central">
-            <article>
-                <p class="titulo">Cuánta harina? </p>
-                <form class="formulario" action="" id="formulario">
-
-                    <label for="estilo">Estilo de pizza:</label>
-                    <select class="calculadora_input" name="estilo" id="estilo">
-                        <option value="napolitana">Pizza Napolitana</option>
-                        <option value="romana">Pizza Romana</option>
-                        <option value="chubutense">Pizza chubutense</option>
-                    </select>
-
-                    <label for="numero_de_pizzas">Número de pizzas:</label>
-                    <input class="calculadora_input" type="number" name="numero_de_pizzas" placeholder="4" required="true" min="1">
-
-                    <label for="levadura">Tipo de levadura:</label>
-                    <select class="calculadora_input" name="levadura" id="" >
-                        <option value="fresca">Levadura Fresca</option>
-                        <option value="seca">Levadura Seca</option>
-                    </select>
-
-                    <label for="hidratacion">% de hidratación:</label>
-                    <input class="calculadora_input" type="number" name="hidratacion" placeholder="80%" required="true" max="100" min="10">
-
-                    <label for="gramos">Tamaño de pizza (gr):</label>
-                    <input class="calculadora_input" type="number" name="gramos" placeholder="250" required="true" min="50" max="500">
-
-                    <input type="submit" value="Calcular" class="enviar">
-
-                </form>
-            </article>
-        </section>
-
+                <div class="canvas" id="canvas3js"></div>
     </main>
 
-    <div class="contenedor_modal" id="contenedor_receta">
-        <div class="modal_receta">
-            <h3 id="titulo_ingredientes">Ingredientes</h3>
-            <div class="grid_ingredientes" id="lista_ingredientes">
-            </div>
-            <div class="contenedor_botones">
-                <input type="button" value="cerrar" id="btn_cerrar">
-                <input type="button" value="Agregar a carrito" id="btn_agregar_carrito">
-            </div>
-            
-        </div>
-    </div>
     <footer>
         <span><a href="https://twitter.com/mdemiang"> twitter</a></span>
         <span>©marcelo demian gómez</span>        
     </footer>
 </div>
-<script src="./stock.js" type="module"></script>
-<script src="./calculadora.js" type="module"></script>
+<script type="importmap">
+    {
+        "imports": {
+            "three": "./node_modules/three/build/three.module.js",
+            "loader": "./node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+            "orbiter": "./node_modules/three/examples/jsm/controls/OrbitControls.js"
+        }
+        
+    }
+</script>
+<script src="./src/animacion3js.js" type="module"></script>
+<script src="./src/stock.js" type="module"></script>
+<script src="./src/index.js" type="module"></script>
 </body>
 </html>

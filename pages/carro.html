@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="shortcut icon" href="./assets/img/icono_1.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="shortcut icon" href="../assets/img/icono_1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/styles.css">
 
     <title>PD Carrito</title>
 </head>
@@ -16,17 +16,18 @@
 
     <div class="grid">
     <header>
-        <a href="./index.html" id="icono_home"><img class="icono" src="./assets/img/icono_1.png" alt="Home"></a>
+        <a href="../index.html" id="icono_home"><img class="icono" src="../assets/img/icono_1.png" alt="Home"></a>
     </header>      
 
     <main >
         <h1 class="titulo_carrito">CARRITO</h1>
         <div class="totales_carrito" id="contenedor_totales">
+            <div class="botones_carrito">
+                <input type="button" value="Vaciar Carrito" id="btn_vaciar_carrito">
+            </div>
         </div>
 
-        <div class="botones_carrito">
-            <input type="button" value="Vaciar Carrito" id="btn_vaciar_carrito">
-        </div>
+        
     </main>
 
     <footer>
@@ -34,7 +35,7 @@
         <span>©marcelo demian gómez</span>        
     </footer>
 </div>
-<script src="./stock.js" type="module"></script>
-<script src="./calculadora.js" type="module"></script>
+<script src="../src/stock.js" type="module"></script>
+<script src="../src/index.js" type="module"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "pizza3js",
+  "version": "1.0.0",
+  "description": "Inclusión de 3D en la interfaz del sitio de pizza",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "marcelo gómez",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.1",
+    "three": "^0.147.0",
+    "toastr": "^2.1.4"
+  }
+}

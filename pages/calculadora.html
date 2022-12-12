@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" href="../assets/img/icono_1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../node_modules/toastr/build/toastr.css">
+
+    <title>PD Calculadora</title>
+</head>
+
+<body>
+
+    <div class="grid">
+    <header>
+        <a href="../index.html" id="icono_home"><img class="icono" src="../assets/img/icono_1.png" alt="Home"></a>
+        <a href="./carro.html" id="link_carrito"><span class="material-symbols-outlined">shopping_cart_checkout</span></a>
+    </header>      
+
+    <main>
+
+        <section class="circulo_central">
+            <article>
+                <p class="titulo">Cuánta harina? </p>
+                <form class="formulario" action="" id="formulario">
+
+                    <label for="estilo">Estilo de pizza:</label>
+                    <select class="calculadora_input" name="estilo" id="estilo">
+                        <option value="napolitana">Pizza Napolitana</option>
+                        <option value="romana">Pizza Romana</option>
+                        <option value="chubutense">Pizza chubutense</option>
+                    </select>
+
+                    <label for="numero_de_pizzas">Número de pizzas:</label>
+                    <input class="calculadora_input" type="number" name="numero_de_pizzas" placeholder="4" required="true" min="1">
+
+                    <label for="levadura">Tipo de levadura:</label>
+                    <select class="calculadora_input" name="levadura" id="" >
+                        <option value="fresca">Levadura Fresca</option>
+                        <option value="seca">Levadura Seca</option>
+                    </select>
+
+                    <label for="hidratacion">% de hidratación:</label>
+                    <input class="calculadora_input" type="number" name="hidratacion" placeholder="80%" required="true" max="100" min="10">
+
+                    <label for="gramos">Tamaño de pizza (gr):</label>
+                    <input class="calculadora_input" type="number" name="gramos" placeholder="250" required="true" min="50" max="500">
+
+                    <input type="submit" value="Calcular" class="enviar">
+
+                </form>
+            </article>
+        </section>
+
+    </main>
+
+    <div class="contenedor_modal" id="contenedor_receta">
+        <div class="modal_receta">
+            <h3 id="titulo_ingredientes">Ingredientes</h3>
+            <div class="grid_ingredientes" id="lista_ingredientes">
+            </div>
+            <div class="contenedor_botones">
+                <input type="button" value="cerrar" id="btn_cerrar">
+                <input type="button" value="Agregar a carrito" id="btn_agregar_carrito">
+            </div>
+            
+        </div>
+    </div>
+    <footer>
+        <span><a href="https://twitter.com/mdemiang"> twitter</a></span>
+        <span>©marcelo demian gómez</span>        
+    </footer>
+</div>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/toastr/toastr.js"></script>
+<script src="../src/stock.js" type="module"></script>
+<script src="../src/index.js" type="module"></script>
+</body>
+</html>
