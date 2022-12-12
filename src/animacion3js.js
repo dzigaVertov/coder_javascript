@@ -48,7 +48,7 @@ controls.target.set(0,0,0);
 let rendertarget;
 let textureLoader = new THREE.TextureLoader();
 
-let texture = textureLoader.load('/assets/img/bg_room.jpg', function (texture) {
+let texture = textureLoader.load('/coder_javascript/assets/img/bg_room.jpg', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     texture.encoding = THREE.sRGBEncoding;
     const pmRemGenerator = new THREE.PMREMGenerator(renderer);
@@ -59,7 +59,7 @@ let texture = textureLoader.load('/assets/img/bg_room.jpg', function (texture) {
 });
 
 let normalLoader = new THREE.TextureLoader();
-let normalPizza = normalLoader.load('/assets/img/normal_masa.png');
+let normalPizza = normalLoader.load('/coder_javascript/assets/img/normal_masa.png');
 normalPizza.mapping = THREE.UVMapping;
 
 let model;
