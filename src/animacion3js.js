@@ -44,11 +44,12 @@ controls.enableDamping = true;
 controls.target.set(0,0,0);
 
 
+async function cargar_modelo_pizza() {
 
-let rendertarget;
-let textureLoader = new THREE.TextureLoader();
+    let rendertarget;
+    let textureLoader = new THREE.TextureLoader();
 
-let texture = textureLoader.load('/coder_javascript/assets/img/bg_room.jpg', function (texture) {
+    let texture = await textureLoader.load('/coder_javascript/assets/img/bg_room.jpg', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     texture.encoding = THREE.sRGBEncoding;
     const pmRemGenerator = new THREE.PMREMGenerator(renderer);
@@ -59,7 +60,7 @@ let texture = textureLoader.load('/coder_javascript/assets/img/bg_room.jpg', fun
 });
 
 let normalLoader = new THREE.TextureLoader();
-let normalPizza = normalLoader.load('/coder_javascript/assets/img/normal_masa.png');
+let normalPizza = await normalLoader.load('/coder_javascript/assets/img/normal_masa.png');
 normalPizza.mapping = THREE.UVMapping;
 
 let model;
@@ -104,6 +105,7 @@ loader.load('/coder_javascript/assets/3d/pizza_3.glb', function ( gltf ) {
 }, undefined, function (error) {
     console.error( error );
 })
+}
 
 function medidas_canvas() {
     const canvas = renderer.domElement;
@@ -117,6 +119,8 @@ function medidas_canvas() {
         camera.updateProjectionMatrix();
     }
 }
+
+cargar_modelo_pizza();
 renderer.setSize( window.innerWidth, window.innerHeight);
 renderer.render(scene, camera);
 canvaso.append(renderer.domElement);
