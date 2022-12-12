@@ -43,6 +43,8 @@ controls.enablePan = false;
 controls.enableDamping = true;
 controls.target.set(0,0,0);
 
+let model;
+let mixer;
 
 async function cargar_modelo_pizza() {
 
@@ -63,8 +65,7 @@ let normalLoader = new THREE.TextureLoader();
 let normalPizza = await normalLoader.load('/coder_javascript/assets/img/normal_masa.png');
 normalPizza.mapping = THREE.UVMapping;
 
-let model;
-let mixer;
+
 const loader = new GLTFLoader();
 loader.load('/coder_javascript/assets/3d/pizza_3.glb', function ( gltf ) {
     model = gltf.scene;
