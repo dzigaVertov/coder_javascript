@@ -88,7 +88,7 @@ loader.load('/assets/3d/pizza_3.glb', function ( gltf ) {
     })
 
     const loader_anim = new GLTFLoader();
-    loader_anim.load('/assets/3d/pizza_3.glb', gltf => {
+    loader_anim.load('/coder_javascript/assets/3d/pizza_3.glb', gltf => {
         mixer = new THREE.AnimationMixer(model);
         const animacion_caida = mixer.clipAction(gltf.animations[0]);
         animacion_caida.setLoop(THREE.LoopOnce);
