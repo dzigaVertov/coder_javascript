@@ -76,8 +76,12 @@ loader.load('/coder_javascript/assets/3d/pizza_3.glb', function ( gltf ) {
             console.log(o.name);
         }
         if ( o.isMesh ) {
-            o.material.envMap = rendertarget.texture;
-            o.material.envMapIntensity = 1;
+            if (rendertarget){
+                o.material.envMap = rendertarget.texture;
+                o.material.envMapIntensity = 1;
+
+            }
+            
             /* o.material.bumpMap = texture;
             o.material.bumpScale = 0.01; */
             o.material.needsUpdate = true;
