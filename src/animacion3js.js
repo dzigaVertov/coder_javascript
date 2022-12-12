@@ -51,7 +51,7 @@ async function cargar_modelo_pizza() {
     let rendertarget;
     let textureLoader = new THREE.TextureLoader();
 
-    let texture = await textureLoader.load('/coder_javascript/assets/img/bg_room.jpg', function (texture) {
+    let texture = await textureLoader.load('../assets/img/bg_room.jpg', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     texture.encoding = THREE.sRGBEncoding;
     const pmRemGenerator = new THREE.PMREMGenerator(renderer);
@@ -62,12 +62,12 @@ async function cargar_modelo_pizza() {
 });
 
 let normalLoader = new THREE.TextureLoader();
-let normalPizza = await normalLoader.load('/coder_javascript/assets/img/normal_masa.png');
+let normalPizza = await normalLoader.load('../assets/img/normal_masa.png');
 normalPizza.mapping = THREE.UVMapping;
 
 
 const loader = new GLTFLoader();
-loader.load('/coder_javascript/assets/3d/pizza_3.glb', function ( gltf ) {
+loader.load('../assets/3d/pizza_3.glb', function ( gltf ) {
     model = gltf.scene;
     
 
@@ -94,7 +94,7 @@ loader.load('/coder_javascript/assets/3d/pizza_3.glb', function ( gltf ) {
     })
 
     const loader_anim = new GLTFLoader();
-    loader_anim.load('/coder_javascript/assets/3d/pizza_3.glb', gltf => {
+    loader_anim.load('../assets/3d/pizza_3.glb', gltf => {
         mixer = new THREE.AnimationMixer(model);
         const animacion_caida = mixer.clipAction(gltf.animations[0]);
         animacion_caida.setLoop(THREE.LoopOnce);
