@@ -59,7 +59,7 @@ let texture = textureLoader.load('../assets/img/bg_room.jpg', function (texture)
 });
 
 let normalLoader = new THREE.TextureLoader();
-let normalPizza = normalLoader.load('../assets/img/normal_masa.png');
+let normalPizza = normalLoader.load('/assets/img/normal_masa.png');
 normalPizza.mapping = THREE.UVMapping;
 
 let model;
